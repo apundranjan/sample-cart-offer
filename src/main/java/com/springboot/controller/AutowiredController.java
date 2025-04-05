@@ -14,8 +14,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import com.springboot.controller.*;
 @RestController
+@RequestMapping
 public class AutowiredController {
 
 
@@ -23,13 +24,19 @@ public class AutowiredController {
 
 	@PostMapping(path = "/api/v1/offer")
 	public ApiResponse postOperation(@RequestBody OfferRequest offerRequest) {
-		System.out.println(offerRequest);
-		allOffers.add(offerRequest);
-		return new ApiResponse("success");
+		if (offerRequest == null || offerRequest.getRestaurant_id() == 0) {
+			ApiResponse apiResponse = new ApiResponse("Invalid request");
+            return apiResponse;
+        }
+
+        System.out.println(offerRequest);
+        allOffers.add(offerRequest);
+        ApiResponse apiResponse = new ApiResponse("success");
+        return apiResponse;
 	}
 
 	@PostMapping(path = "/api/v1/cart/apply_offer")
-	public ApplyOfferResponse applyOffer(@RequestBody ApplyOfferRequest applyOfferRequest) throws Exception {
+	public ApplyOfferResponse applyOffer(@RequestBody ApplyOfferResponse applyOfferRequest) throws Exception {
 		System.out.println(applyOfferRequest);
 		int cartVal = applyOfferRequest.getCart_value();
 		SegmentResponse segmentResponse = getSegmentResponse(applyOfferRequest.getUser_id());
@@ -47,9 +54,11 @@ public class AutowiredController {
 			} else {
 				cartVal = (int) (cartVal - cartVal * gotOffer.getOffer_value()*(0.01));
 			}
-
+		}else if(!matchRequest.isPresent()) {
+			System.out.println("No matching offer found. Returning original cart value.");
+			return new ApplyOfferResponse(cartVal, applyOfferRequest.getUser_id(), applyOfferRequest.getRestaurant_id());
 		}
-		return new ApplyOfferResponse(cartVal);
+		return new ApplyOfferResponse(cartVal, applyOfferRequest.getUser_id(), applyOfferRequest.getRestaurant_id());
 	}
 
 	private SegmentResponse getSegmentResponse(int userid)

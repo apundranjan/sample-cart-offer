@@ -3,9 +3,14 @@ package com.springboot;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.controller.OfferRequest;
 import com.springboot.controller.SegmentResponse;
-import org.junit.Assert;
+
+
+
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+//import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,7 +23,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RunWith(SpringRunner.class)
+
+
+//@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class CartOfferApplicationTests {
 
@@ -66,3 +76,4 @@ public class CartOfferApplicationTests {
 		return true;
 	}
 }
+

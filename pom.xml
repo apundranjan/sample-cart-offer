@@ -14,7 +14,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.4.RELEASE</version>
+		<version>2.7.15</version>
+
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -47,11 +48,29 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.22</version>
+			<version>1.16.22</version><!--$NO-MVN-MAN-VER$-->
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.8.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!--<dependency>
+			<groupId>Framework</groupId>
+			<artifactId>Framework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>-->
 	</dependencies>
+	<repositories>
+    <repository>
+        <id>company-repo</id>
+        <url>https://repo.mycompany.com/repository/maven-releases/</url>
+    </repository>
+</repositories>
 
 	<build>
 		<plugins>
